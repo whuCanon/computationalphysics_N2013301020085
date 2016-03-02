@@ -2,6 +2,7 @@
 This is the repository for my CP homeworks and exercises.
 ## Homework List  
 ## Extra Exercise
+[python mini-projects](https://github.com/whuCanon/mini-project_collection/tree/master/Python "python mini-projects")
 **********
 ### Others   
 神猫保佑，永无BUG（远处食用更佳）
