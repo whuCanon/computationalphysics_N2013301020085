@@ -1,5 +1,6 @@
 import os
 import time
+import math
 
 
 class Canvas:
@@ -11,11 +12,11 @@ class Canvas:
 
     def draw(self):
         tmp_str = ""
-        for i in range(self.height):
+        for y in range(self.height):
             tmp_str = ""
-            for j in range(self.width):
-                if self.tupMatrix.has_key((i, j)):
-                    tmp_str += self.tupMatrix[(i, j)]
+            for x in range(self.width):
+                if self.tupMatrix.has_key((x, y)):
+                    tmp_str += self.tupMatrix[(x, y)]
                 else:
                     tmp_str += " "
             print tmp_str
@@ -24,37 +25,50 @@ class Canvas:
         cursor_pos = pos
         for ch in text:
             self.tupMatrix[tuple(cursor_pos)] = ch
-            cursor_pos[1] += 1
+            cursor_pos[0] += 1
 
     def draw_image(self, text, pos, angle = 0):
         image_width = 0
         image_height = 0
-        cursor_pos = pos
+        cursor_pos = [pos[0], pos[1]]
+        tmp_width = 0
         for ch in text:
-            tmp_width = 0
-            if ch != '\n':
+            if ch != '&':
                 self.tupMatrix[tuple(cursor_pos)] = ch
-                cursor_pos[1] += 1
+                cursor_pos[0] += 1
                 tmp_width += 1
             else:
-                cursor_pos[0] += 1
-                cursor_pos[1] = pos[1]
+                cursor_pos[1] += 1
+                cursor_pos[0] = pos[0]
                 image_height += 1
                 if tmp_width > image_width:
                     image_width = tmp_width
-        # rotate(image_width, image_height, pos, angle)
+                tmp_width = 0
+        self.draw_Line("image_width = "+str(image_width), [1, 1])
+        self.draw_Line("image_height = "+str(image_height), [1, 2])
+        self.rotate(image_width, image_height, pos, angle)
 
+    def rotate(self, width, height, pos, angle):
+        o_pos = [pos[0] + width / 2, pos[1] + height / 2]
+        for y in range(height):
+            for x in range(width):
+                o_x = pos[0] - o_pos[0] + x
+                o_y = pos[1] - o_pos[1] + y
+                o_x_ = int(o_x * math.cos(angle) - o_y * math.sin(angle))
+                o_y_ = int(o_x * math.sin(angle) + o_y * math.cos(angle))
+                self.tupMatrix[(o_x_ + o_pos[0], o_y_ + o_pos[1])] = self.tupMatrix[(x + pos[0], y + pos[1])]
+                del self.tupMatrix[(x + pos[0], y + pos[1])]
 
     def clear(self):
         self.tupMatrix.clear()
 
     def update(self):
         for i in range(self.height):
-            self.tupMatrix[(i, 0)] = '|'
-            self.tupMatrix[(i, self.width - 1)] = '|'
+            self.tupMatrix[(0, i)] = '|'
+            self.tupMatrix[(self.width - 1), i] = '|'
         for i in range(self.width):
-            self.tupMatrix[(0, i)] = '='
-            self.tupMatrix[(self.height - 1, i)] = '='
+            self.tupMatrix[(i, 0)] = '='
+            self.tupMatrix[(i, self.height - 1)] = '='
         os.system('cls')
         self.draw()
         self.clear()
@@ -105,24 +119,24 @@ class Tablet(Canvas):
     def update(self):
         for i in range(self.height / self.FONT_HEIGHT):
             for j in range(self.width):
-                self.tupMatrix[((i + 1) * self.FONT_HEIGHT, j)] = '-'
+                self.tupMatrix[(j, (i + 1) * self.FONT_HEIGHT)] = '-'
         Canvas.update(self)
 
     def draw_Text(self, text, pos = [0, 0]):
         str_len = len(text)
-        for i in range(self.rows):
-            for j in range(self.cols):
+        for y in range(self.rows):
+            for x in range(self.cols):
                 if str_len == 0:
                     break
                 try:
-                    cursor_pos = [i * self.FONT_HEIGHT + pos[0] + 1, j * self.FONT_WIDTH + pos[1] + 1]
+                    cursor_pos = [x * self.FONT_WIDTH + pos[0] + 1, y * self.FONT_HEIGHT + pos[1] + 1]
                     for ch in self.dict[text[-str_len]]:
                         if ch != '\n':
                             self.tupMatrix[tuple(cursor_pos)] = ch
-                            cursor_pos[1] += 1
-                        else:
                             cursor_pos[0] += 1
-                            cursor_pos[1] = j * self.FONT_WIDTH + pos[1] + 1
+                        else:
+                            cursor_pos[1] += 1
+                            cursor_pos[0] = x * self.FONT_WIDTH + pos[0] + 1
                     str_len -= 1
                 except KeyError:
                     self.draw_Line("only upper case!", [1, 1])
