@@ -9,7 +9,7 @@ WRITE_ROWS = 2    # < 3
 WRITE_COLS = 10
 PAINT_WIDTH = 100
 PAINT_HEIGHT = 25
-ROTATE_SPEED = 0.1
+ROTATE_SPEED = 0.05
 
 
 def change_mode(mode):
@@ -63,13 +63,13 @@ def run_mode3():
     angle = 0
     canvas = MiniGUI.Canvas(PAINT_WIDTH, PAINT_HEIGHT)
     try:
-        image_text = raw_input("Enter an image in pixel matrix, use & to a new line:")[ : -1]
+        pass# image_text = raw_input("Enter an image in pixel matrix, use & to a new line:")
     except KeyboardInterrupt:
         pass
     while True:
         angle += math.pi * ROTATE_SPEED
         angle %= math.pi * 2
-        canvas.draw_image(image_text, [40, 5], angle)
+        canvas.draw_image("###############&", [40, 5], angle)
         canvas.update()
 
 

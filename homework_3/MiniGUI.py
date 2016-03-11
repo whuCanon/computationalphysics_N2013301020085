@@ -33,7 +33,7 @@ class Canvas:
         cursor_pos = [pos[0], pos[1]]
         tmp_width = 0
         for ch in text:
-            if ch != '&':
+            if ch != '&' and ch != '\r' and ch != '\n':
                 self.tupMatrix[tuple(cursor_pos)] = ch
                 cursor_pos[0] += 1
                 tmp_width += 1
@@ -49,15 +49,25 @@ class Canvas:
         self.rotate(image_width, image_height, pos, angle)
 
     def rotate(self, width, height, pos, angle):
+        tmp_dict = {}
         o_pos = [pos[0] + width / 2, pos[1] + height / 2]
+        for y in range(height):
+            for x in range(width):
+                try:
+                    tmp_dict[(x + pos[0], y + pos[1])] = self.tupMatrix[(x + pos[0], y + pos[1])]
+                except:
+                    pass
         for y in range(height):
             for x in range(width):
                 o_x = pos[0] - o_pos[0] + x
                 o_y = pos[1] - o_pos[1] + y
                 o_x_ = int(o_x * math.cos(angle) - o_y * math.sin(angle))
                 o_y_ = int(o_x * math.sin(angle) + o_y * math.cos(angle))
-                self.tupMatrix[(o_x_ + o_pos[0], o_y_ + o_pos[1])] = self.tupMatrix[(x + pos[0], y + pos[1])]
-                del self.tupMatrix[(x + pos[0], y + pos[1])]
+                try:
+                    self.tupMatrix[(o_x_ + o_pos[0], o_y_ + o_pos[1])] = tmp_dict[(x + pos[0], y + pos[1])]
+                    del self.tupMatrix[(x + pos[0], y + pos[1])]
+                except:
+                    pass
 
     def clear(self):
         self.tupMatrix.clear()
@@ -69,7 +79,7 @@ class Canvas:
         for i in range(self.width):
             self.tupMatrix[(i, 0)] = '='
             self.tupMatrix[(i, self.height - 1)] = '='
-        os.system('cls')
+        os.system('clear')
         self.draw()
         self.clear()
         try:
