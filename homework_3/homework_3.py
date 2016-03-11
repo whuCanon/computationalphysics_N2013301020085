@@ -6,8 +6,8 @@ import MiniGUI
 RUN_MODE = 1
 WRITE_ROWS = 2    # < 3
 WRITE_COLS = 10
-PAINT_WIDTH = 80
-PAINT_HEIGHT = 30
+PAINT_WIDTH = 100
+PAINT_HEIGHT = 25
 
 
 def change_mode(mode):
@@ -58,7 +58,12 @@ def run_mode2():
 
 def run_mode3():
     global canvas
-    pass
+    canvas = MiniGUI.Canvas(PAINT_WIDTH, PAINT_HEIGHT)
+    try:
+        canvas.draw_image(raw_input()[ : -1], [2, 2])
+    except KeyboardInterrupt:
+        pass
+    canvas.update()
 
 
 def run():

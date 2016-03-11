@@ -3,6 +3,7 @@ import time
 
 
 class Canvas:
+    REFRESH_RATE = 0.05
     def __init__(self, width, height):
         self.height = height
         self.width = width
@@ -25,10 +26,35 @@ class Canvas:
             self.tupMatrix[tuple(cursor_pos)] = ch
             cursor_pos[1] += 1
 
+    def draw_image(self, text, pos, angle = 0):
+        image_width = 0
+        image_height = 0
+        cursor_pos = pos
+        for ch in text:
+            tmp_width = 0
+            if ch != '\n':
+                self.tupMatrix[tuple(cursor_pos)] = ch
+                cursor_pos[1] += 1
+                tmp_width += 1
+            else:
+                cursor_pos[0] += 1
+                cursor_pos[1] = pos[1]
+                image_height += 1
+                if tmp_width > image_width:
+                    image_width = tmp_width
+        # rotate(image_width, image_height, pos, angle)
+
+
     def clear(self):
         self.tupMatrix.clear()
 
     def update(self):
+        for i in range(self.height):
+            self.tupMatrix[(i, 0)] = '|'
+            self.tupMatrix[(i, self.width - 1)] = '|'
+        for i in range(self.width):
+            self.tupMatrix[(0, i)] = '='
+            self.tupMatrix[(self.height - 1, i)] = '='
         os.system('cls')
         self.draw()
         self.clear()
@@ -39,7 +65,6 @@ class Canvas:
 
 
 class Tablet(Canvas):
-    REFRESH_RATE = 0.05
     FONT_WIDTH = 9
     FONT_HEIGHT = 10
     dict = {
@@ -81,12 +106,6 @@ class Tablet(Canvas):
         for i in range(self.height / self.FONT_HEIGHT):
             for j in range(self.width):
                 self.tupMatrix[((i + 1) * self.FONT_HEIGHT, j)] = '-'
-        for i in range(self.height):
-            self.tupMatrix[(i, 0)] = '|'
-            self.tupMatrix[(i, self.width - 1)] = '|'
-        for i in range(self.width):
-            self.tupMatrix[(0, i)] = '='
-            self.tupMatrix[(self.height - 1, i)] = '='
         Canvas.update(self)
 
     def draw_Text(self, text, pos = [0, 0]):
