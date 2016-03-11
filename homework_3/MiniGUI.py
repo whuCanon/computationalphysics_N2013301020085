@@ -20,10 +20,6 @@ import math
 class Canvas:
     REFRESH_RATE = 0.05     # the refresh rate of virtual screen, default is 1 / 0.05 = 20 per second
     def __init__(self, width, height):
-        try:
-            os.sys('gnome-terminal --maximize')
-        except:
-            pass
         self.height = height
         self.width = width
         self.tupMatrix = {}
@@ -83,7 +79,7 @@ class Canvas:
             del image_dict[point]
             image_dict[(o_x_ + o_pos[0], o_y_ + o_pos[1])] = tmp_dict[point]
 
-    # clear the virtual screen and real screen per frame
+    # clear the virtual screen per frame
     def clear(self):
         self.tupMatrix.clear()
 
@@ -95,7 +91,7 @@ class Canvas:
         for i in range(self.width):
             self.tupMatrix[(i, 0)] = '='
             self.tupMatrix[(i, self.height - 1)] = '='
-        os.system('cls')
+        os.system('clear')
         self.draw()
         self.clear()
         try:
