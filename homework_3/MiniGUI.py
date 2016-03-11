@@ -1,15 +1,34 @@
+# This is a mini-GUI module which is based on terminal
+# Writen by Wentao Liu, last modified on 2016/03/11
+
+# to use this module, firstly create a new Canvas(with width and height, for painting), 
+# or Tablet(with rows and columns, for writting) as global variate.
+# For Canvas, you can use draw_line() to draw a string to the virtual screen, 
+# or you can use draw_image() to draw a image in type matrix to the virtual screen.
+# for Tablet, you can use draw_text() to draw a series of big character to the virtual screen.
+# After draw*(), you need to use update() to print your virtual screen to the real screen.
+
+# You should notice that the big character you can "draw_text()" are limited to the Tablet's dict.
+# You can add your own big character to the dict, but remember don't be out of range
+
 import os
 import time
 import math
 
 
+# usage: canvas = MiniGUI.Canvas(width, height)
 class Canvas:
-    REFRESH_RATE = 0.05
+    REFRESH_RATE = 0.05     # the refresh rate of virtual screen, default is 1 / 0.05 = 20 per second
     def __init__(self, width, height):
+        try:
+            os.sys('gnome-terminal --maximize')
+        except:
+            pass
         self.height = height
         self.width = width
         self.tupMatrix = {}
 
+    # print the virtual screen to real screen
     def draw(self):
         tmp_str = ""
         for y in range(self.height):
@@ -21,20 +40,23 @@ class Canvas:
                     tmp_str += " "
             print tmp_str
 
-    def draw_Line(self, text, pos):
+    # usage: canvas.draw_line("the text you want to print", [position_x, position_y])
+    def draw_line(self, text, pos):
         cursor_pos = pos
         for ch in text:
             self.tupMatrix[tuple(cursor_pos)] = ch
             cursor_pos[0] += 1
 
+    # usage: canvas.draw_image("the text of image in type matrix", pos, rotation's_angle(is optional, default is 0))
     def draw_image(self, text, pos, angle = 0):
+        image_dict = {}
         image_width = 0
         image_height = 0
         cursor_pos = [pos[0], pos[1]]
         tmp_width = 0
         for ch in text:
             if ch != '&' and ch != '\r' and ch != '\n':
-                self.tupMatrix[tuple(cursor_pos)] = ch
+                image_dict[tuple(cursor_pos)] = ch
                 cursor_pos[0] += 1
                 tmp_width += 1
             else:
@@ -44,34 +66,28 @@ class Canvas:
                 if tmp_width > image_width:
                     image_width = tmp_width
                 tmp_width = 0
-        self.draw_Line("image_width = "+str(image_width), [1, 1])
-        self.draw_Line("image_height = "+str(image_height), [1, 2])
-        self.rotate(image_width, image_height, pos, angle)
+        if angle != 0:
+            self.rotate(image_dict, image_width, image_height, pos, angle)
+        self.tupMatrix.update(image_dict)
 
-    def rotate(self, width, height, pos, angle):
+    # rotate the image
+    def rotate(self, image_dict, width, height, pos, angle):
         tmp_dict = {}
+        tmp_dict.update(image_dict)
         o_pos = [pos[0] + width / 2, pos[1] + height / 2]
-        for y in range(height):
-            for x in range(width):
-                try:
-                    tmp_dict[(x + pos[0], y + pos[1])] = self.tupMatrix[(x + pos[0], y + pos[1])]
-                except:
-                    pass
-        for y in range(height):
-            for x in range(width):
-                o_x = pos[0] - o_pos[0] + x
-                o_y = pos[1] - o_pos[1] + y
-                o_x_ = int(o_x * math.cos(angle) - o_y * math.sin(angle))
-                o_y_ = int(o_x * math.sin(angle) + o_y * math.cos(angle))
-                try:
-                    self.tupMatrix[(o_x_ + o_pos[0], o_y_ + o_pos[1])] = tmp_dict[(x + pos[0], y + pos[1])]
-                    del self.tupMatrix[(x + pos[0], y + pos[1])]
-                except:
-                    pass
+        for point in tmp_dict:
+            o_x = point[0] - o_pos[0]
+            o_y = point[1] - o_pos[1]
+            o_x_ = round(o_x * math.cos(angle) - o_y * math.sin(angle))
+            o_y_ = round(o_x * math.sin(angle) + o_y * math.cos(angle))
+            del image_dict[point]
+            image_dict[(o_x_ + o_pos[0], o_y_ + o_pos[1])] = tmp_dict[point]
 
+    # clear the virtual screen and real screen per frame
     def clear(self):
         self.tupMatrix.clear()
 
+    # update and print the real screen
     def update(self):
         for i in range(self.height):
             self.tupMatrix[(0, i)] = '|'
@@ -79,7 +95,7 @@ class Canvas:
         for i in range(self.width):
             self.tupMatrix[(i, 0)] = '='
             self.tupMatrix[(i, self.height - 1)] = '='
-        os.system('clear')
+        os.system('cls')
         self.draw()
         self.clear()
         try:
@@ -88,9 +104,11 @@ class Canvas:
             pass
 
 
+# usage: tablet = MiniGUI.Tablet(rows, columns)
 class Tablet(Canvas):
-    FONT_WIDTH = 9
-    FONT_HEIGHT = 10
+    FONT_WIDTH = 9      # the max width of the character
+    FONT_HEIGHT = 10    # the max height of the character
+    # some character's type matrix, you can add yourself
     dict = {
         'A': "\n   #     \n   ##    \n  # #    \n  #  #   \n  ####   \n #    #  \n###  ### \n", \
         'B': "\n######   \n #    #  \n ######  \n #     # \n #     # \n #     # \n#######  \n", \
@@ -126,13 +144,8 @@ class Tablet(Canvas):
         self.cols = cols
         Canvas.__init__(self, cols * self.FONT_WIDTH + 1, rows * self.FONT_HEIGHT + 1)
 
-    def update(self):
-        for i in range(self.height / self.FONT_HEIGHT):
-            for j in range(self.width):
-                self.tupMatrix[(j, (i + 1) * self.FONT_HEIGHT)] = '-'
-        Canvas.update(self)
-
-    def draw_Text(self, text, pos = [0, 0]):
+    # usage: tablet.draw_text("this must be in the dict!", [position_x, position_y])
+    def draw_text(self, text, pos = [0, 0]):
         str_len = len(text)
         for y in range(self.rows):
             for x in range(self.cols):
@@ -151,3 +164,8 @@ class Tablet(Canvas):
                 except KeyError:
                     self.draw_Line("only upper case!", [1, 1])
 
+    def update(self):
+        for i in range(self.height / self.FONT_HEIGHT):
+            for j in range(self.width):
+                self.tupMatrix[(j, (i + 1) * self.FONT_HEIGHT)] = '-'
+        Canvas.update(self)
