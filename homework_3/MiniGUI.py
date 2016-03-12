@@ -85,6 +85,13 @@ class Canvas:
 
     # update and print the real screen
     def update(self):
+        tmp_dict = {}
+        tmp_dict.update(self.tupMatrix)
+        for key in tmp_dict:
+            if key[0] < 0 or key[0] > self.width or key[1] < 0 or key[1] > self.height:
+                del self.tupMatrix[key]
+                self.tupMatrix[(key[0] % self.width, key[1] % self.height)] = tmp_dict[key]
+        del tmp_dict
         for i in range(self.height):
             self.tupMatrix[(0, i)] = '|'
             self.tupMatrix[(self.width - 1), i] = '|'
