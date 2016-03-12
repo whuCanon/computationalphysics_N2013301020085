@@ -165,7 +165,7 @@ class Tablet(Canvas):
                             cursor_pos[0] = x * self.FONT_WIDTH + pos[0] + 1
                     str_len -= 1
                 except KeyError:
-                    self.draw_Line("only upper case!", [1, 1])
+                    self.draw_line("only upper case!", [1, 1])
 
     def update(self):
         for i in range(self.height / self.FONT_HEIGHT):
