@@ -1,9 +1,9 @@
 # This is a mini-GUI module which is based on terminal
 # Writen by Wentao Liu, last modified on 2016/03/11
 
-# to use this module, firstly create a new Canvas(with width and height, for painting), 
+# to use this module, firstly create a new Canvas(with width and height, for painting),
 # or Tablet(with rows and columns, for writting) as global variate.
-# For Canvas, you can use draw_line() to draw a string to the virtual screen, 
+# For Canvas, you can use draw_line() to draw a string to the virtual screen,
 # or you can use draw_image() to draw a image in type matrix to the virtual screen.
 # for Tablet, you can use draw_text() to draw a series of big character to the virtual screen.
 # After draw*(), you need to use update() to print your virtual screen to the real screen.
@@ -16,8 +16,8 @@ import time
 import math
 
 
-# usage: canvas = MiniGUI.Canvas(width, height)
 class Canvas:
+    ''' usage: canvas = MiniGUI.Canvas(width, height) '''
     REFRESH_RATE = 0.05     # the refresh rate of virtual screen, default is 1 / 0.05 = 20 per second
     def __init__(self, width, height):
         self.height = height
@@ -36,15 +36,21 @@ class Canvas:
                     tmp_str += " "
             print tmp_str
 
-    # usage: canvas.draw_line("the text you want to print", [position_x, position_y])
     def draw_line(self, text, pos):
+        '''
+        usage: canvas.draw_line("the text you want to print", [position_x,
+        position_y])
+        '''
         cursor_pos = pos
         for ch in text:
             self.tupMatrix[tuple(cursor_pos)] = ch
             cursor_pos[0] += 1
 
-    # usage: canvas.draw_image("the text of image in type matrix", pos, rotation's_angle(is optional, default is 0))
     def draw_image(self, text, pos, angle = 0):
+        '''
+        usage: canvas.draw_image("the text of image in type matrix", pos,
+        rotation's_angle(is optional, default is 0))
+        '''
         image_dict = {}
         image_width = 0
         image_height = 0
@@ -66,8 +72,8 @@ class Canvas:
             self.rotate(image_dict, image_width, image_height, pos, angle)
         self.tupMatrix.update(image_dict)
 
-    # rotate the image
     def rotate(self, image_dict, width, height, pos, angle):
+        ''' rotate the image '''
         tmp_dict = {}
         tmp_dict.update(image_dict)
         o_pos = [pos[0] + width / 2, pos[1] + height / 2]
@@ -79,12 +85,12 @@ class Canvas:
             del image_dict[point]
             image_dict[(o_x_ + o_pos[0], o_y_ + o_pos[1])] = tmp_dict[point]
 
-    # clear the virtual screen per frame
     def clear(self):
+        ''' clear the virtual screen per frame '''
         self.tupMatrix.clear()
 
-    # update and print the real screen
     def update(self):
+        ''' update and print the real screen '''
         tmp_dict = {}
         tmp_dict.update(self.tupMatrix)
         for key in tmp_dict:
@@ -107,8 +113,8 @@ class Canvas:
             pass
 
 
-# usage: tablet = MiniGUI.Tablet(rows, columns)
 class Tablet(Canvas):
+    ''' usage: tablet = MiniGUI.Tablet(rows, columns) '''
     FONT_WIDTH = 9      # the max width of the character
     FONT_HEIGHT = 10    # the max height of the character
     # some character's type matrix, you can add yourself
@@ -139,7 +145,7 @@ class Tablet(Canvas):
         'X': "\n###  ### \n #    #  \n  #  #   \n   ##    \n   ##    \n  #  #   \n##    ## \n", \
         'Y': "\n### ###  \n #   #   \n #   #   \n  # #    \n   #     \n   #     \n  ###    \n", \
         'Z': "\n ######  \n#    #   \n    #    \n   #     \n  #      \n #    #  \n######   \n", \
-        ' ': "\n         \n         \n         \n         \n         \n         \n         \n" 
+        ' ': "\n         \n         \n         \n         \n         \n         \n         \n"
     }
 
     def __init__(self, rows, cols):
@@ -147,8 +153,8 @@ class Tablet(Canvas):
         self.cols = cols
         Canvas.__init__(self, cols * self.FONT_WIDTH + 1, rows * self.FONT_HEIGHT + 1)
 
-    # usage: tablet.draw_text("this must be in the dict!", [position_x, position_y])
     def draw_text(self, text, pos = [0, 0]):
+        ''' usage: tablet.draw_text("this must be in the dict!", [position_x, position_y]) '''
         str_len = len(text)
         for y in range(self.rows):
             for x in range(self.cols):
