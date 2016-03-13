@@ -57,8 +57,8 @@
 
 ####源代码  
  
-[MiniGUI.py](https://github.com/whuCanon/computationalphysics_N2013301020085/tree/master/homework_3/MiniGUI.py)  
-[homework_3.py](https://github.com/whuCanon/computationalphysics_N2013301020085/tree/master/homework_3/homework_3.py)  
+[MiniGUI.py](https://raw.githubusercontent.com/whuCanon/computationalphysics_N2013301020085/master/homework_3/MiniGUI.py)  
+[homework_3.py](https://raw.githubusercontent.com/whuCanon/computationalphysics_N2013301020085/master/homework_3/homework_3.py)  
 
 ####运行方法  
 
