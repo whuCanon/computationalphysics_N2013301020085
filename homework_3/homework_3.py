@@ -115,7 +115,7 @@ def run_mode2():
     global canvas
     canvas = MiniGUI.Tablet(WRITE_ROWS, WRITE_COLS)
     try:
-        canvas.draw_text(raw_input("Enter any number of upper case: ")[ : -1].upper())
+        canvas.draw_text(raw_input("Enter any number of upper case: ").upper())
     except KeyboardInterrupt:
         pass
     canvas.update()
