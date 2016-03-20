@@ -5,8 +5,7 @@
 本次作业挑选`1.6-人口增长问题`作为作业内容，给出了针对人口增长问题的常微分方程的近似解决方案。
 
 ##背景介绍  
-
-对于人口增长模型一般使用以下公式描述
+对于人口增长模型一般使用以下公式描述  
 ![formula1](https://raw.githubusercontent.com/whuCanon/computationalphysics_N2013301020085/master/chapter1/Resource/formula1.png)  
 其中N为人口数，aN对应人口增长，bN<sup>2</sup>对应人口死亡。当人口数量很大时，由于资源有限的原因导致人口存在上限，所以人口消减项由N<sup>2</sup>影响，当b=0时，人口呈指数增长。
 
