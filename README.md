@@ -1,8 +1,12 @@
 # Computational Physics
+  
+Name:   刘文焘  
+Student Number:   2013301020085  
+  
 This is the repository for my CP homeworks and exercises.
 ## Homework List  
 [homework_3](https://github.com/whuCanon/computationalphysics_N2013301020085/blob/master/homework_3/README.md)  
-[chapter1](https://github.com/whuCanon/computationalphysics_N2013301020085/tree/master/chapter1/README.md)
+[chapter1 problem1.3](https://github.com/whuCanon/computationalphysics_N2013301020085/tree/master/chapter1/README.md)
 ## Extra Exercise
 [python mini-projects](https://github.com/whuCanon/mini-project_collection/tree/master/Python "python mini-projects")
 **********
