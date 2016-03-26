@@ -1,5 +1,7 @@
 #Homework 3 Description     
 
+**注： MiniGUI转移至新的版本库进行更新 ！**[MiniGUI](https://github.com/whuCanon/MiniGUI)
+
 ##摘要    
 本文介绍了作业程序设计的想法、原理和具体实现，实现过程中考虑到具体需求和发展需要，设计了一个基于命令行的微型伪图形用户接口。  
 
