@@ -1,0 +1,8 @@
+Target position:
+	X: 20000.000000 
+	Y: 2000.000000 
+
+Shooting angle: 0.816814 
+Shooting Speed: 583.000000
+
+Attacking accuracy: 2.592488 
