@@ -3,6 +3,7 @@
 
 import sys
 import math
+import time
 import numpy 
 from matplotlib import pyplot 
 from matplotlib import animation
@@ -13,7 +14,7 @@ B2m = 4e-5
 initSpeed = 1000.
 hit_area = 10.
 sita = math.pi / 2
-sign = 1
+sign = -2
 
 
 class FlightState:
@@ -85,11 +86,11 @@ def shoot():
     print "sita: ", sita * 180 / math.pi
     print "initSpeed: ", initSpeed
 
-
+trail_x, trail_y = [], []
 farthest_x = 0
-target = []
-target.append(float(raw_input("Please input the target's X_position: ")))
-target.append(float(raw_input("Please input the target's Y_position: ")))
+target = [20000, 2000]
+# target.append(float(raw_input("Please input the target's X_position: ")))
+# target.append(float(raw_input("Please input the target's Y_position: ")))
 
 fig = pyplot.figure()
 xmin, xmax = 0., 4e+4
@@ -112,27 +113,33 @@ def initAnimation():
     return line,
 
 def animate(i):
-    global sign, sita, initSpeed, hit_area, farthest_x
+    global sign, sita, initSpeed, hit_area, farthest_x, trail_x, trail_y
     x, y = [], []
     cannonShell = calculate(target)
     for flightState in cannonShell.flightState:
         x.append(flightState.x)
         y.append(flightState.y)
-    if sign == 1:
-        sita -= math.pi / (2 * 100)
+    if sign == -2:
+        sita -= math.pi / (2 * 300)
         if farthest_x < cannonShell.flightState[-1].x:
             farthest_x = cannonShell.flightState[-1].x
         else:
-            sign = 2
-    elif sign == 2:
-        initSpeed -= 1
+            sign = -1
+    elif sign == -1:
         accuracy = math.fabs(cannonShell.flightState[-1].x - target[0])
+        initSpeed -= math.sqrt(accuracy / 1000)
         if accuracy < hit_area:
             shoot()
             storeData(target, accuracy)
             sign = 0
     else:
-    	sys.exit(0)
+        try:
+            trail_x.append(cannonShell.flightState[sign].x)
+            trail_y.append(cannonShell.flightState[sign].y)
+            x, y = trail_x, trail_y
+            sign += 1
+        except IndexError:
+            sys.exit(0)
     line.set_data(x, y)   
     return line,
 
