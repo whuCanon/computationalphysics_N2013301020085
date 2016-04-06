@@ -91,8 +91,9 @@ farthest_x = 0
 target = [20000, 2000]
 # target.append(float(raw_input("Please input the target's X_position: ")))
 # target.append(float(raw_input("Please input the target's Y_position: ")))
+# time.sleep(10)
 
-fig = pyplot.figure()
+fig = pyplot.figure(figsize=(15,6))
 xmin, xmax = 0., 4e+4
 ymin, ymax = 0., 1e+4
 dx = (xmax - xmin) * 0.1
@@ -101,7 +102,8 @@ ax = pyplot.axes(xlim=(xmin, xmax + dx), ylim=(ymin, ymax + dy))
 line, = ax.plot([], [])
 
 # add auxiliary line
-pyplot.plot([0,xmax],[target[1],target[1]], color='red', linewidth=2.5, linestyle="--")
+pyplot.plot([0,xmax], [target[1],target[1]], color='red', linewidth=2.5, linestyle="--")
+pyplot.plot([target[0],target[0]], [0,ymax], color='red', linewidth=2.5, linestyle="--")
 
 # name the axis
 pyplot.xlabel(r'$x(m)$', fontsize=16)
