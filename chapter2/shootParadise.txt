@@ -1,8 +1,7 @@
 Target position:
-	X: 20000.000000 
+	X: 40000.000000 
 	Y: 2000.000000 
+	Z: 10000.000000
 
-Shooting angle: 48.600000 
-Shooting Speed: 584.738976
+Shooting Velocity: 704.184166	792.824184	173.169348
 
-Attacking accuracy: 9.504954 
