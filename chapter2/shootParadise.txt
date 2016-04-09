@@ -3,5 +3,5 @@ Target position:
 	Y: 2000.000000 
 	Z: 20000.000000
 
-Shooting Velocity: 385.836065	596.565885	385.836065
+Shooting Velocity: 387.313296	596.425203	384.170456
 

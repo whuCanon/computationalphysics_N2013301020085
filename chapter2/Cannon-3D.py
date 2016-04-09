@@ -17,7 +17,7 @@ selfRotation = vector(0, 7.292e-5*math.sin(latitude), -7.292e-5*math.cos(latitud
 
 # some global variate
 farthest_d = 0
-target = [40000, 2000, 20000]
+target = [20000., 2000., 20000.]
 # target.append(float(raw_input("Please input the target's X_position: ")))
 # target.append(float(raw_input("Please input the target's Y_position: ")))
 # time.sleep(10)
@@ -137,7 +137,6 @@ def aim_find(target):
                 pre_accuracy_v = accuracy_v
         else:
             accuracy = d - math.sqrt(target[0]**2 + target[2]**2)
-            print accuracy, "\t", initSpeed
             if math.fabs(accuracy) < hit_area / 10:
                 break
             initSpeed -= accuracy / tmp_num / 10
@@ -200,6 +199,9 @@ shell = sphere(pos=(0,0,0), radius=1, color=color.cyan)
 shell.trail = curve(color=shell.color)
 battery = box(pos=(0,-1.1,0), size=(10,0.2,10), color=color.green)
 targetPlane = box(pos=tuple(target), size=(20,0.2,20), color=color.green)
+axis_x = arrow(pos=(0,0,0), axis=(50000,0,0), shaftwidth=0.1, color=color.blue)
+axis_y = arrow(pos=(0,0,0), axis=(0,50000,0), shaftwidth=0.1, color=color.blue)
+axis_z = arrow(pos=(0,0,0), axis=(0,0,50000), shaftwidth=0.1, color=color.blue)
 
 aim_coarse(target)
 aim_find(target)
