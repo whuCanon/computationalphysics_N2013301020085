@@ -17,7 +17,7 @@ selfRotation = vector(0, 7.292e-5*math.sin(latitude), -7.292e-5*math.cos(latitud
 
 # some global variate
 farthest_d = 0
-target = [40000, 2000, 10000]
+target = [40000, 2000, 20000]
 # target.append(float(raw_input("Please input the target's X_position: ")))
 # target.append(float(raw_input("Please input the target's Y_position: ")))
 # time.sleep(10)
@@ -116,7 +116,7 @@ def aim_coarse(target):
 
 def aim_find(target):
     global sign, theta, sinf, cosf, initSpeed, farthest_d
-    tmp_num = 1000
+    tmp_num = 30
     pre_accuracy_v = tmp_num
     while True:
         cannonShell = calculate(target)
@@ -137,9 +137,10 @@ def aim_find(target):
                 pre_accuracy_v = accuracy_v
         else:
             accuracy = d - math.sqrt(target[0]**2 + target[2]**2)
+            print accuracy, "\t", initSpeed
             if math.fabs(accuracy) < hit_area / 10:
                 break
-            initSpeed -= accuracy / tmp_num
+            initSpeed -= accuracy / tmp_num / 10
             
 
 
