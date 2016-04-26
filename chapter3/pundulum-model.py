@@ -45,24 +45,24 @@ def plot_regular(ax, i):
     ax.set_xlabel(r'$\theta(radians)$', fontsize=14)
     ax.set_ylabel(r'$\omega(radians/s)$', fontsize=14)
     if i == 0:
-        ax.text(2, 1.5, r'$\alpha = 0$', color='black', fontsize=20)
-        #ax.text(2, 1.5, r'$\alpha = \pi$', color='black', fontsize=20)
+        #ax.text(2, 1.5, r'$\alpha = 0$', color='black', fontsize=20)
+        ax.text(2, 1.5, r'$\alpha = \pi$', color='black', fontsize=20)
     elif i == 1:
-        ax.text(2, 1.5, r'$\alpha = \frac{\pi}{4}$', color='black', fontsize=20)
-        #ax.text(2, 1.5, r'$\alpha = \frac{5\pi}{4}$', color='black', fontsize=20)
+        #ax.text(2, 1.5, r'$\alpha = \frac{\pi}{4}$', color='black', fontsize=20)
+        ax.text(2, 1.5, r'$\alpha = \frac{5\pi}{4}$', color='black', fontsize=20)
     elif i == 2:
-        ax.text(2, 1.5, r'$\alpha = \frac{\pi}{2}$', color='black', fontsize=20)
-        #ax.text(2, 1.5, r'$\alpha = \frac{3\pi}{2}$', color='black', fontsize=20)
+        #ax.text(2, 1.5, r'$\alpha = \frac{\pi}{2}$', color='black', fontsize=20)
+        ax.text(2, 1.5, r'$\alpha = \frac{3\pi}{2}$', color='black', fontsize=20)
     elif i == 3:
-        ax.text(2, 1.5, r'$\alpha = \frac{3\pi}{4}$', color='black', fontsize=20)
-        #ax.text(2, 1.5, r'$\alpha = \frac{7\pi}{4}$', color='black', fontsize=20)
+        #ax.text(2, 1.5, r'$\alpha = \frac{3\pi}{4}$', color='black', fontsize=20)
+        ax.text(2, 1.5, r'$\alpha = \frac{7\pi}{4}$', color='black', fontsize=20)
 
 
 initState = MotionState(0.2, 0.)
 pundulum = Pundulum(initState, Fd, 0.04)
 
-tmp_alpha = [0, 1/8., 1/4., 3/8.]
-#tmp_alpha = [1/2., 5/8., 3/4., 7/8.]
+#tmp_alpha = [0, 1/8., 1/4., 3/8.]
+tmp_alpha = [1/2., 5/8., 3/4., 7/8.]
 tmp_beta  = pundulum.dt*Wd/2/math.pi
 
 fig = pyplot.figure(figsize=(19,12))
@@ -82,7 +82,6 @@ for i in range(4):
 
 def plot_digram(n):
     global pundulum
-    #pundulum = Pundulum(initState, Fd, 0.04)
     for i in range(5000):
         state = pundulum.motionState[0]
         tmp = state.t*Wd/2/math.pi - tmp_alpha[n]
@@ -95,9 +94,11 @@ def plot_digram(n):
 
 def startPlot(event):
     if event.key == 'q':
-        while True:
+        for j in range(100):
             for i in range(len(ax)):
                 plot_digram(i)
+        #pyplot.savefig("pundulum_1.png",dpi=72)
+        pyplot.savefig("pundulum_2.png",dpi=72)
 
 fig.canvas.mpl_connect('key_press_event', startPlot)
 pyplot.show()
