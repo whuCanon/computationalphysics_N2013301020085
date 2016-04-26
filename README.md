@@ -8,9 +8,10 @@ This is the repository for my CP homeworks and exercises.
 Exercise_3：    [MiniGUI](https://github.com/whuCanon/computationalphysics_N2013301020085/blob/master/homework_3/README.md)  
 Exercise_4：    [chapter1 problem1.5](https://github.com/whuCanon/computationalphysics_N2013301020085/tree/master/chapter1/Exercise_4.md)  
 Exercise_5：     [chapter1 problem1.3](https://www.zybuluo.com/Canonvar/note/325222)  
-Exercise_6：     [chapter2 problem2.10(level2)](https://www.zybuluo.com/Canonvar/note/335208)  
-Exercise_7：     [chapter2 problem2.12(level2)](https://www.zybuluo.com/Canonvar/note/339513)  
+Exercise_6：     [chapter2 problem2.10(level_2)](https://www.zybuluo.com/Canonvar/note/335208)  
+Exercise_7：     [chapter2 problem2.12(level_2)](https://www.zybuluo.com/Canonvar/note/339513)  
 Exercise_8：     [chapter3 problem3.4](https://www.zybuluo.com/Canonvar/note/348789)  
+Exercise_9：     [chapter3 problem3.12(level_1)](https://www.zybuluo.com/Canonvar/note/358632)  
 ## Extra Exercise
 [python mini-projects](https://github.com/whuCanon/mini-project_collection/tree/master/Python "python mini-projects")
 **********
