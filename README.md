@@ -12,6 +12,7 @@ Exercise_6：     [chapter2 problem2.10(level_2)](https://www.zybuluo.com/Canonv
 Exercise_7：     [chapter2 problem2.12(level_2)](https://www.zybuluo.com/Canonvar/note/339513)  
 Exercise_8：     [chapter3 problem3.4](https://www.zybuluo.com/Canonvar/note/348789)  
 Exercise_9：     [chapter3 problem3.12(level_1)](https://www.zybuluo.com/Canonvar/note/358632)  
+Exercise_10:     [chapter3 problem3.31](https://www.zybuluo.com/Canonvar/note/365201)  
 ## Extra Exercise
 [python mini-projects](https://github.com/whuCanon/mini-project_collection/tree/master/Python "python mini-projects")
 **********
