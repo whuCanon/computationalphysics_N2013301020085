@@ -13,8 +13,8 @@ Exercise_7：     [chapter2 problem2.12(level_2)](https://www.zybuluo.com/Canonv
 Exercise_8：     [chapter3 problem3.4](https://www.zybuluo.com/Canonvar/note/348789)  
 Exercise_9：     [chapter3 problem3.12(level_1)](https://www.zybuluo.com/Canonvar/note/358632)  
 Exercise_10:     [chapter3 problem3.31](https://www.zybuluo.com/Canonvar/note/365201)  
-## Extra Exercise
-[python mini-projects](https://github.com/whuCanon/mini-project_collection/tree/master/Python "python mini-projects")
+Exercise_11:     [chapter4 problem4.7](https://www.zybuluo.com/Canonvar/note/372515)  
+
 **********
 ### Others   
 神猫保佑，永无BUG（远处食用更佳）
