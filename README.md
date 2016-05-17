@@ -12,8 +12,9 @@ Exercise_6：     [chapter2 problem2.10(level_2)](https://www.zybuluo.com/Canonv
 Exercise_7：     [chapter2 problem2.12(level_2)](https://www.zybuluo.com/Canonvar/note/339513)  
 Exercise_8：     [chapter3 problem3.4](https://www.zybuluo.com/Canonvar/note/348789)  
 Exercise_9：     [chapter3 problem3.12(level_1)](https://www.zybuluo.com/Canonvar/note/358632)  
-Exercise_10:     [chapter3 problem3.31](https://www.zybuluo.com/Canonvar/note/365201)  
-Exercise_11:     [chapter4 problem4.7](https://www.zybuluo.com/Canonvar/note/372515)  
+Exercise_10：    [chapter3 problem3.31](https://www.zybuluo.com/Canonvar/note/365201)  
+Exercise_11：    [chapter4 problem4.7](https://www.zybuluo.com/Canonvar/note/372515)  
+Exercise_12：    [chapter4 problem4.16](https://www.zybuluo.com/Canonvar/note/380444)  
 
 **********
 ### Others   
