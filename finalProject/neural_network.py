@@ -4,11 +4,11 @@ import math
 import pickle
 import random
 
-HEIGHT = 8*2
-WIDTH  = 5*2
+HEIGHT = 8
+WIDTH  = 5
 
 s = []
-sweep = 100
+sweep = 5
 
 Jfile = open("J.pkl", 'r')
 J = pickle.load(Jfile)
@@ -36,30 +36,28 @@ def match(s):
                 eflip = calEflip(s, row, col)
                 if eflip < 0:
                     s[row][col] = -s[row][col]
-                # elif random.random() < 0.001:
-                #     s[row][col] = -s[row][col]
-        display(s)
-        print ""
+                elif random.random() < 0.1:
+                    s[row][col] = -s[row][col]
 
 
 def display(s):
     for i in xrange(HEIGHT):
         for j in xrange(WIDTH):
             if int(s[i][j]) == 1:
-                sys.stdout.write("# ")
+                sys.stdout.write("+ ")
             else:
                 sys.stdout.write("  ")
         print ""
 
 
 initState(s)
-# s[0] = [-1,-1,-1,-1,-1,-1,-1,-1,1,1]
-# s[1] = [-1, 1, 1,-1,-1,-1,-1,-1,1,1]
-# s[2] = [-1,1,-1,1,-1,1,-1,-1,1,1]
-# s[3] = [1,-1,-1,1,-1,-1,1,-1,-1,1]
-# s[4] = [1,1, 1,1,-1,1,1,1,-1,-1]
-# s[5] = [-1,-1,-1,1,-1,-1,-1,-1,1,1]
-# s[6] = [-1, 1,-1, 1,-1,-1,-1,-1,-1,1]
-# s[7] = [-1,-1,-1,1,-1,-1,-1,-1,1,-1]
+s[0] = [ 1, 1, 1, 1, 1]
+s[1] = [-1,-1,-1, 1,-1]
+s[2] = [-1,-1, 1,-1,-1]
+s[3] = [-1, 1,-1,-1,-1]
+s[4] = [ 1,-1,-1,-1,-1]
+s[5] = [ 1,-1,-1,-1, 1]
+s[6] = [-1, 1, 1, 1,-1]
+s[7] = [-1,-1,-1,-1,-1]
 match(s)
 display(s)
