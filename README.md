@@ -17,6 +17,7 @@ Exercise_11：    [chapter4 problem4.7](https://www.zybuluo.com/Canonvar/note/37
 Exercise_12：    [chapter4 problem4.16](https://www.zybuluo.com/Canonvar/note/380444)  
 Exercise_13：    [chapter5 problem5.3](https://www.zybuluo.com/Canonvar/note/386991)  
 Exercise_14：    [chapter6 problem6.6](https://www.zybuluo.com/Canonvar/note/394434)  
+FinalProject：   [finalProject](https://github.com/whuCanon/computationalphysics_N2013301020085/raw/master/finalProject/finalProject.pdf)  
 
 **********
 ### Others   
